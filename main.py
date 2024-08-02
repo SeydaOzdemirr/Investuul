@@ -11,6 +11,7 @@ df = pd.read_excel('altin_dolar_euro_prophet.xlsx')
 df.rename(columns={'ds':'date'}, inplace=True)
 
 df['date'] = pd.to_datetime(df['date'], format='%Y%m%d')
+st.set_page_config(page_title='Investuul', layout='wide', page_icon='wallet')
 
 st.markdown(
     """
