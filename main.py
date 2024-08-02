@@ -5,13 +5,15 @@ from streamlit_option_menu import option_menu
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+st.set_page_config(page_title='Investuul', layout='wide', page_icon='wallet')
 
 df = pd.read_excel('altin_dolar_euro_prophet.xlsx')
+df_data = pd.read_excel('model_oncesi_veri.xlsx',index_col=0)
 
 df.rename(columns={'ds':'date'}, inplace=True)
 
 df['date'] = pd.to_datetime(df['date'], format='%Y%m%d')
-st.set_page_config(page_title='Investuul', layout='wide', page_icon='wallet')
+df_data['date'] = pd.to_datetime(df_data['date'], format='%Y%m%d')
 
 st.markdown(
     """
@@ -38,9 +40,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Streamlit başlatma
-#st.sidebar.title('Navigation')
-#page = st.sidebar.radio('Go to', ['Anasayfa', 'Time Series Forecasting', 'Investuul'])
 
 with st.sidebar:
     selected = option_menu(
@@ -74,7 +73,7 @@ if selected == 'Anasayfa':
 
     st.subheader(':orange[Veri Hakkında]')
     st.markdown('''
-    - Kullanılan veri seti: 01-01-2019 - 30-06-2024 tarihleri arasındaki günlük dolar, euro ve altın fiyatları.
+    - Kullanılan veri seti: 01-01-2019 - 17-07-2024 tarihleri arasındaki günlük dolar, euro ve altın fiyatları.
     - Tahmin aracı: FbProphet modeli.
     - Tahmin süresi: Gelecek 12 ayı günlük olarak tahminler.''')
 
@@ -108,22 +107,22 @@ elif selected == 'Time Series Forecasting':
             - *Haftasonları borsalar kapalı olduğundan dolayı veriler boş gelmiştir. Veride boş olarak gelen haftasonları bir önceki cuma gününün değerleriyle doldurulmuştur.*
         ''')
 
-    st.write('*Verinin satır, sütun sayısı:* ',df.shape)
-    st.write('*Verideki sütunların yapısı: *',df.dtypes)
-    st.write('*Veride bulun boş satırlar:*',df.isnull().sum())
-    st.write('*Verilerin dağılımı*',df.quantile([0, 0.05, 0.50, 0.75, 0.95, 0.99, 1]))
-    st.write(':green[Verideki minimum tarih:]', df['date'].min())
-    st.write(':green[Verideki maximum tarih:]', df['date'].max())
-    st.write('*Verinin dağılımı:*', df.describe())
-    st.write('*Verideki ilk 5 satır:* ', df.head())
-    st.write('*Verideki son 5 satır:*', df.tail())
+    st.write('*Verinin satır, sütun sayısı:* ',df_data.shape)
+    st.write('*Verideki sütunların yapısı: *',df_data.dtypes)
+    st.write('*Veride bulun boş satırlar:*',df_data.isnull().sum())
+    st.write('*Verilerin dağılımı*',df_data.quantile([0, 0.05, 0.50, 0.75, 0.95, 0.99, 1]))
+    st.write(':green[Verideki minimum tarih:]', df_data['date'].min())
+    st.write(':green[Verideki maximum tarih:]', df_data['date'].max())
+    st.write('*Verinin dağılımı:*', df_data.describe())
+    st.write('*Verideki ilk 5 satır:* ', df_data.head())
+    st.write('*Verideki son 5 satır:*', df_data.tail())
 
     st.divider()
 
     st.subheader(':orange[Tarih Aralığını Seçin]')
-    start_date = st.date_input('*Başlangıç Tarihi*', df['date'].min())
-    end_date = st.date_input('*Bitiş Tarihi*', df['date'].max())
-    filtered_df = df[(df['date'] >= pd.to_datetime(start_date)) & (df['date'] <= pd.to_datetime(end_date))]
+    start_date = st.date_input('*Başlangıç Tarihi*', df_data['date'].min())
+    end_date = st.date_input('*Bitiş Tarihi*', df_data['date'].max())
+    filtered_df = df_data[(df_data['date'] >= pd.to_datetime(start_date)) & (df_data['date'] <= pd.to_datetime(end_date))]
     st.subheader(':orange[*Dolar, Euro ve Altın Değerleri*]')
     fig, ax = plt.subplots(3, 1, figsize=(10, 15))
 
