@@ -32,7 +32,7 @@ st.markdown(
     f"""
     <style>
     .stApp {{
-        background-color: #E0EDF9; 
+        background-color: #FFFFFF; 
         background-image: none;
     }}
     </style>
@@ -82,19 +82,18 @@ if selected == 'Anasayfa':
     - Dolar 
         - *Küresel rezerv para birimi, yüksek likidite, ekonomik ve politik olaylardan etkilenir.*
         - *Güçlü ABD ekonomisi, kriz dönemlerinde güvenli liman.*
-        - *FED faiz oranları, enflasyon, küresel ticaret.*
+        - *Etkenler: FED faiz oranları, enflasyon, küresel ticaret.*
     ''')
     st.markdown('''
         - Euro 
             - *Avrupa Birliği'nin ortak para birimi, bölgesel ekonomik sağlığa bağlı.*
-            - *Enflasyon/deflasyon oranları, bölgesel ekonomik krizler.*
-            - *ECB politikaları, ekonomik veriler, siyasi gelişmeler.*
+            - *Etkenler: Enflasyon/deflasyon oranları, bölgesel ekonomik krizler. ECB politikaları, ekonomik veriler, siyasi gelişmeler.*
         ''')
     st.markdown('''
             - Altın 
                 - *Değer saklama aracı, yüksek likidite, enflasyona karşı koruma.*
                 - *Dalgalanma, kriz dönemlerinde artış.*
-                - *Enflasyon, faiz oranları, küresel olaylar.*
+                - *Etkenler: Enflasyon, faiz oranları, küresel olaylar.*
             ''')
 
 
@@ -104,7 +103,7 @@ elif selected == 'Time Series Forecasting':
     st.markdown('''
         - 2019 - 2024 yıllarının günlük olarak Dolar, Euro ve Altın tutarlarının TL karşılıklarıyla Prophet modeli geliştirilmiştir.
             - *Modelde yıllık ve haftalık seasonality bulunmaktadır.*
-            - *Haftasonları borsalar kapalı olduğundan dolayı veriler boş gelmiştir. Veride boş olarak gelen haftasonları bir önceki cuma gününün değerleriyle doldurulmuştur.*
+            - *Haftasonları piyasalar kapalı olduğundan dolayı veriler boş gelmiştir. Veride boş gelen hafta sonlarının verilerini son hafta içi verileri ile doldurulmuştur.*
         ''')
 
     st.write('*Verinin satır, sütun sayısı:* ',df_data.shape)
@@ -155,7 +154,7 @@ elif selected == 'Time Series Forecasting':
 elif selected == 'Investuul':
     st.title(':green[Investuul]')
     st.write('''*Gireceğiniz yatırım tutarına göre bugünün değeri ele alınarak Dolar, Euro ya da Altın 
-    alınırsa seçtiğiniz vadeye sonunda yatırım araçlarından hangisinin daha kârlı olduğunun bilgisini 
+    alınırsa seçtiğiniz vade sonunda yatırım araçlarından hangisinin daha kârlı olduğunun bilgisini 
     görebileceksiniz.*''')
 
 
